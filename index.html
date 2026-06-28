@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>King Meech | Creative Restaurant & Wholesale Food</title>
+  <meta name="description" content="King Meech Creative Restaurant - Ohio wholesale food supplier. Bulk ordering, delivery, pickup. Fine dining & fast food coming soon.">
+  <style>
+    :root {
+      --primary: #0f1419;
+      --gold: #d4a574;
+      --cream: #f7f5f2;
+      --charcoal: #2a2a2a;
+      --muted: #6e6e6e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--charcoal); background: var(--cream); line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
+    h3 { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    p { color: var(--muted); margin-bottom: 1rem; }
+   .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
+
+    /* EBT Banner */
+   .ebt-banner { background: var(--gold); color: var(--primary); text-align: center; padding: 0.6rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 1000; background: var(--primary); border-bottom: 2px solid var(--gold); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.3rem 5%; max-width: 1400px; margin: 0 auto; }
+   .logo { display: flex; align-items: center; gap: 1rem; }
+   .logo img { height: 50px; width: auto; } /* REPLACE THIS with your logo */
+   .logo-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #fff; letter-spacing: 0.05em; }
+   .logo-text span { color: var(--gold); }
+    nav ul { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+    nav a { text-decoration: none; color: rgba(255,255,255,0.9); font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
+    nav a:hover { color: var(--gold); }
+   .btn { background: var(--gold); color: var(--primary); padding: 1rem 2.2rem; text-decoration: none; display: inline-block; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.3s; }
+   .btn:hover { background: #fff; transform: translateY(-2px); }
+   .btn-dark { background: var(--primary); color: #fff; border: 2px solid var(--primary); }
+   .btn-dark:hover { background: transparent; color: var(--primary); }
+
+    /* Hero */
+   .hero { background: linear-gradient(135deg, var(--primary) 0%, #1a1f24 100%); color: #fff; padding: 8rem 0 6rem; position: relative; overflow: hidden; }
+   .hero::after { content: ''; position: absolute; top: 0; right: -10%; width: 50%; height: 100%; background: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068') center/cover; opacity: 0.15; }
+   .hero-content { position: relative; z-index: 2; max-width: 700px; }
+   .hero .tag { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; display: block; font-weight: 700; }
+   .hero h1 { margin-bottom: 1.5rem; }
+   .hero h1 .accent { color: var(--gold); }
+   .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; max-width: 600px; }
+   .hero-badges { display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+   .badge { border-left: 3px solid var(--gold); padding-left: 1rem; }
+   .badge strong { color: #fff; display: block; font-size: 1.1rem; }
+   .badge span { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
+    /* Sections */
+    section { padding: 6rem 0; }
+    section:nth-child(odd) { background: #fff; }
+   .section-head { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+   .section-tag { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
+
+    /* Industries */
+   .industries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+   .industry-card { background: var(--cream); padding: 3rem 2rem; border: 2px solid transparent; transition: all 0.3s; position: relative; }
+   .industry-card.active { border-color: var(--gold); background: #fff; }
+   .industry-card.active::before { content: 'ACTIVE NOW'; position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--primary); font-size: 0.7rem; padding: 0.3rem 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
+   .industry-card.coming { opacity: 0.5; }
+   .industry-card.coming::before { content: 'COMING SOON'; position: absolute; top: 1rem; right: 1rem; background: var(--charcoal); color: #fff; font-size: 0.7rem; padding: 0.3rem 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
+   .industry-icon { font-size: 3rem; margin-bottom: 1rem; }
+   .industry-card h3 { color: var(--primary); }
+
+    /* Wholesale Products */
+   .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+   .product-card { background: #fff; border: 1px solid #e0e0e0; transition: all 0.3s; }
+   .product-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+   .product-img { width: 100%; height: 200px; object-fit: cover; }
+   .product-info { padding: 1.5rem; }
+   .product-category { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
+   .product-info h3 { font-size: 1.3rem; margin: 0.5rem 0; }
+   .product-price { font-size: 1.4rem; color: var(--primary); font-weight: 700; margin: 0.5rem 0; }
+   .product-price span { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+
+    /* Order Form */
+   .order-section { background: var(--primary); color: #fff; }
+   .order-section h2 { color: #fff; }
+   .order-section p { color: rgba(255,255,255,0.8); }
+   .order-form { background: #fff; color: var(--charcoal); padding: 3rem; margin-top: 3rem; }
+   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+   .form-group { margin-bottom: 1.5rem; }
+   .form-group.full { grid-column: 1 / -1; }
+   label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--charcoal); }
+   input, select, textarea { width: 100%; padding: 0.9rem; border: 2px solid #e0e0e0; font-size: 1rem; font-family: inherit; transition: border 0.3s; }
+   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
+   .checkbox-wrap { display: flex; align-items: start; gap: 0.8rem; padding: 1rem; background: var(--cream); border: 2px solid #e0e0e0; }
+   .checkbox-wrap input { width: auto; margin-top: 0.2rem; }
+   .product-select { display: grid; gap: 1rem; }
+   .product-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; align-items: center; padding: 1rem; background: var(--cream); }
+
+    /* Forms Section */
+   .forms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+   .form-card { background: var(--cream); padding: 2.5rem; border-top: 4px solid var(--gold); }
+   .form-card h3 { color: var(--primary); margin-bottom: 1rem; }
+
+    /* Footer */
+    footer { background: var(--primary); color: rgba(255,255,255,0.7); padding: 4rem 0 2rem; }
+   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+   .footer-grid h4 { color: #fff; margin-bottom: 1.2rem; font-size: 1rem; letter-spacing: 0.05em; }
+   .footer-grid a { color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 0.7rem; font-size: 0.9rem; transition: color 0.3s; }
+   .footer-grid a:hover { color: var(--gold); }
+   .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; font-size: 0.85rem; }
+
+    /* Mobile */
+    @media (max-width: 968px) {
+      nav ul { display: none; }
+     .industries { grid-template-columns: 1fr; }
+     .form-grid { grid-template-columns: 1fr; }
+     .product-row { grid-template-columns: 1fr; }
+     .footer-grid { grid-template-columns: 1fr; }
+     .hero::after { display: none; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- EBT Notice -->
+  <div class="ebt-banner">
+    WE'RE WORKING TO ACCEPT SNAP/EBT CARDS SOON - STAY TUNED FOR UPDATES
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <!-- REPLACE WITH YOUR LOGO: <img src="your-logo.png" alt="King Meech"> -->
+        <div class="logo-text">KING <span>MEECH</span></div>
+      </div>
+      <ul>
+        <li><a href="#wholesale">Wholesale</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#services">Cooking Services</a></li>
+        <li><a href="#forms">Careers & Invest</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#order" class="btn">Order Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="tag">Est. 2026 • Ohio Based</span>
+        <h1>Creative Food.<br><span class="accent">Wholesale Power.</span></h1>
+        <p>King Meech supplies restaurants, meal prep companies, and families with premium bulk ingredients. Fine dining techniques meet wholesale efficiency. Order by the case, pickup or delivery.</p>
+        <a href="#order" class="btn">Start Wholesale Order</a>
+        <div class="hero-badges">
+          <div class="badge">
+            <strong>Bulk Pricing</strong>
+            <span>Case & pallet orders</span>
+          </div>
+          <div class="badge">
+            <strong>Delivery & Pickup</strong>
+            <span>Cleveland & Columbus</span>
+          </div>
+          <div class="badge">
+            <strong>Cook It For You</strong>
+            <span>Additional service fee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-tag">Three Industries, One Vision</p>
+        <h2>The King Meech Brand</h2>
+        <p>We’re building a food ecosystem. Wholesale is live now. Restaurants launching soon.</p>
+      </div>
+      <div class="industries">
+        <div class="industry-card active">
+          <div class="industry-icon">📦</div>
+          <h3>Wholesale Food</h3>
+          <p>Premium proteins, produce, and specialty items sold by the case. Delivery and pickup available. Custom cuts and prep available.</p>
+          <strong style="color: var(--gold);">NOW OPERATING</strong>
+        </div>
+        <div class="industry-card coming">
+          <div class="industry-icon">🍽️</div>
+          <h3>Fine Dining</h3>
+          <p>An intimate chef's table experience showcasing technique and seasonality. Reservation-only concept.</p>
+          <strong>COMING 2027</strong>
+        </div>
+        <div class="industry-card coming">
+          <div class="industry-icon">🍔</div>
+          <h3>Fast Food</h3>
+          <p>Chef-driven quick service. Quality ingredients, bold flavors, no compromise. Multiple locations planned.</p>
+          <strong>COMING 2027</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wholesale">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-tag">Wholesale Catalog</p>
+        <h2>Order By The Case</h2>
+        <p>Restaurant-quality ingredients at wholesale prices. Minimum order $200. All products vacuum-sealed and fresh.</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=2070" alt="Beef" class="product-img">
+          <div class="product-info">
+            <p class="product-category">Proteins</p>
+            <h3>Prime Ribeye</h3>
+            <p class="product-price">$18.99 <span>/ lb • 10lb case</span></p>
+            <p>USDA Prime, 21-day aged. Custom cuts available.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1587593810167-a84920ea0781?q=80&w=2070" alt="Chicken" class="product-img">
+          <div class="product-info">
+            <p class="product-category">Proteins</p>
+            <h3>Air-Chilled Chicken</h3>
+            <p class="product-price">$3.49 <span>/ lb • 40lb case</span></p>
+            <p>Whole birds or breakdown. Antibiotic-free.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?q=80&w=2070" alt="Produce" class="product-img">
+          <div class="product-info">
+            <p class="product-category">Produce</p>
+            <h3>Seasonal Vegetables</h3>
+            <p class="product-price">$45 <span>/ mixed case</span></p>
+            <p>Chef-selected Ohio farm produce. Changes weekly.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=2073" alt="Sauces" class="product-img">
+          <div class="product-info">
+            <p class="product-category">Prepared</p>
+            <h3>House Sauces</h3>
+            <p class="product-price">$65 <span>/ gallon</span></p>
+            <p>Demi-glace, bordelaise, chimichurri, hot sauces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="background: #fff;">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-tag">Additional Services</p>
+        <h2>We’ll Cook It For You</h2>
+        <p>Buy your wholesale products and let our chefs prepare them. Perfect for events, meal prep, or when you don’t have time to cook.</p>
+      </div>
+      <div class="industries">
+        <div class="industry-card active">
+          <div class="industry-icon">🔥</div>
+          <h3>Custom Butchery</h3>
+          <p>Portion cutting, trimming, tying. $2.50/lb additional. Specify in order notes.</p>
+        </div>
+        <div class="industry-card active">
+          <div class="industry-icon">👨🏾‍🍳</div>
+          <h3>Full Cook Service</h3>
+          <p>We season, cook, and package your order ready to eat. $8/lb additional. 24hr notice required.</p>
+        </div>
+        <div class="industry-card active">
+          <div class="industry-icon">🚚</div>
+          <h3>Delivery</h3>
+          <p>$25 within 15 miles of Cleveland/Columbus. Free delivery on orders over $500. Pickup always free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order" class="order-section">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-tag" style="color: var(--gold);">Wholesale Orders</p>
+        <h2>Place Your Order</h2>
+        <p>Minimum $200. We’ll confirm pricing and availability within 2 hours. Payment due on delivery/pickup.</p>
+      </div>
+      
+      <!-- NETLIFY FORMS: Just upload to Netlify and this works. No coding. -->
+      <form name="wholesale-order" method="POST" data-netlify="true" class="order-form">
+        <input type="hidden" name="form-name" value="wholesale-order">
+        <input type="hidden" name="subject" value="New Wholesale Order - King Meech">
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" name="business" required>
+          </div>
+          <div class="form-group">
+            <label>Contact Name *</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" name="phone" required>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label>Select Products & Quantity</label>
+          <div class="product-select">
+            <div class="product-row">
+              <input type="text" name="product1" placeholder="Product name (e.g. Prime Ribeye)">
+              <input type="number" name="qty1" placeholder="Cases" min="1">
+              <select name="prep1">
+                <option value="">Raw</option>
+                <option value="Butchered +$2.50/lb">Butchered +$2.50/lb</option>
+                <option value="Cooked +$8/lb">Cooked +$8/lb</option>
+              </select>
+            </div>
+            <div class="product-row">
+              <input type="text" name="product2" placeholder="Product name">
+              <input type="number" name="qty2" placeholder="Cases" min="1">
+              <select name="prep2">
+                <option value="">Raw</option>
+                <option value="Butchered +$2.50/lb">Butchered +$2.50/lb</option>
+                <option value="Cooked +$8/lb">Cooked +$8/lb</option>
+              </select>
+            </div>
+            <div class="product-row">
+              <input type="text" name="product3" placeholder="Product name">
+              <input type="number" name="qty3" placeholder="Cases" min="1">
+              <select name="prep3">
+                <option value="">Raw</option>
+                <option value="Butchered +$2.50/lb">Butchered +$2.50/lb</option>
+                <option value="Cooked +$8/lb">Cooked +$8/lb</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Delivery or Pickup? *</label>
+            <select name="method" required>
+              <option value="">Select</option>
+              <option value="Pickup - Cleveland">Pickup - Cleveland</option>
+              <option value="Pickup - Columbus">Pickup - Columbus</option>
+              <option value="Delivery $25">Delivery $25</option>
+              <option value="Delivery Free $500+">Delivery Free $500+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Needed By Date *</label>
+            <input type="date" name="date" required>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label>Delivery Address / Special Instructions</label>
+          <textarea name="notes" rows="3" placeholder="Delivery address, cut specs, cooking instructions, etc."></textarea>
+        </div>
+
+        <div class="form-group full">
+          <div class="checkbox-wrap">
+            <input type="checkbox" name="cooking-service" id="cook" value="Yes">
+            <label for="cook" style="margin: 0;">I understand cooking services are an additional $8/lb and require 24hr notice. By checking this, I authorize King Meech to prepare my products.</label>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <button type="submit" class="btn btn-dark" style="width: 100%;">Submit Wholesale Order</button>
+          <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--muted);">We’ll email you an invoice to confirm. Pay via check, ACH, or card on pickup/delivery.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="forms">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-tag">Join Us</p>
+        <h2>Work, Invest, Give Back</h2>
+        <p>King Meech is more than food. We’re building community through employment, investment, and direct aid.</p>
+      </div>
+      <div class="forms-grid">
+        <!-- Employment Form -->
+        <div class="form-card">
+          <h3>Careers</h3>
+          <p>Join our wholesale, kitchen, or delivery team. Full and part-time. Benefits for full-time.</p>
+          <form name="employment" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="employment">
+            <input type="text" name="name" placeholder="Full Name" required style="margin-bottom: 1rem;">
+            <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
+            <input type="tel" name="phone" placeholder="Phone" required style="margin-bottom: 1rem;">
+            <select name="position" required style="margin-bottom: 1rem;">
+              <option value="">Position Interest</option>
+              <option>Warehouse/Production</option>
+              <option>Delivery Driver</option>
+              <option>Butcher/Prep Cook</option>
+              <option>Sales</option>
+              <option>Management</option>
+            </select>
+            <textarea name="experience" placeholder="Tell us about your experience" rows="3" style="margin-bottom: 1rem;"></textarea>
+            <button type="submit" class="btn btn-dark" style="width: 100%;">Apply Now</button>
+          </form>
+        </div>
+
+        <!-- Investor Form -->
+        <div class="form-card">
+          <h3>Investors</h3>
+          <p>We’re raising capital to expand wholesale operations and launch restaurants. Accredited investors only.</p>
+          <form name="investors" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="investors">
+            <input type="text" name="name" placeholder="Full Name" required style="margin-bottom: 1rem;">
+            <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
+            <input type="text" name="company" placeholder="Company/Fund" style="margin-bottom: 1rem;">
+            <select name="range" required style="margin-bottom: 1rem;">
+              <option value="">Investment Range</option>
+              <option>$25k - $100k</option>
+              <option>$100k - $500k</option>
+              <option>$500k+</option>
+            </select>
+            <button type="submit" class="btn btn-dark" style="width: 100%;">Request Deck</button>
+          </form>
+        </div>
+
+        <!-- Donation Form -->
+        <div class="form-card">
+          <h3>Community Giving</h3>
+          <p>We donate meals and funds to Cleveland/Columbus food banks. Partner with us or donate.</p>
+          <form name="donations" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="donations">
+            <input type="text" name="name" placeholder="Name or Organization" required style="margin-bottom: 1rem;">
+            <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
+            <select name="type" required style="margin-bottom: 1rem;">
+              <option value="">How can we help?</option>
+              <option>Monetary Donation</option>
+              <option>Food Donation Partnership</option>
+              <option>Volunteer</option>
+              <option>Request Support</option>
+            </select>
+            <textarea name="message" placeholder="Details" rows="3" style="margin-bottom: 1rem;"></textarea>
+            <button type="submit" class="btn btn-dark" style="width: 100%;">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background: #fff;">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-tag">Get In Touch</p>
+        <h2>Visit The Warehouse</h2>
+      </div>
+      <div class="industries">
+        <div class="industry-card active">
+          <div class="industry-icon">📍</div>
+          <h3>Cleveland HQ</h3>
+          <p>1420 West 6th Street<br>Cleveland, OH 44113</p>
+          <p><strong>Hours:</strong><br>Mon-Fri 8am-5pm<br>Sat 9am-2pm</p>
+        </div>
+        <div class="industry-card active">
+          <div class="industry-icon">📍</div>
+          <h3>Columbus</h3>
+          <p>2840 Silver Drive<br>Columbus, OH 43211</p>
+          <p><strong>Hours:</strong><br>Mon-Fri 8am-5pm</p>
+        </div>
+        <div class="industry-card active">
+          <div class="industry-icon">📞</div>
+          <h3>Contact</h3>
+          <p><strong>Sales:</strong> (216) 555-0142</p>
+          <p><strong>Support:</strong> hello@kingmeech.com</p>
+          <p><strong>Instagram:</strong> @kingmeechfoods</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo-text" style="margin-bottom: 1rem;">KING <span>MEECH</span></div>
+          <p>Creative Restaurant & Wholesale Food. Built in Ohio.</p>
+          <p style="margin-top: 1rem;"><strong>SNAP/EBT Coming Soon</strong></p>
+        </div>
+        <div>
+          <h4>Wholesale</h4>
+          <a href="#wholesale">Product Catalog</a>
+          <a href="#order">Place Order</a>
+          <a href="#services">Cooking Services</a>
+          <a href="#order">Delivery Info</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#industries">About</a>
+          <a href="#forms">Careers</a>
+          <a href="#forms">Investors</a>
+          <a href="#forms">Community</a>
+        </div>
+        <div>
+          <h4>Coming Soon</h4>
+          <a href="#">Fine Dining</a>
+          <a href="#">Fast Food</a>
+          <a href="#">Catering</a>
+          <a href="#">Gift Cards</a>
+
+        </div>
+        </div>
+    </div></footer></body></html>
