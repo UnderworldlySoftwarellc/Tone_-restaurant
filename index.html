@@ -112,11 +112,28 @@
     /* Mobile */
     @media (max-width: 968px) {
       nav ul { display: none; }
-     .industries { grid-template-columns: 1fr; }
-     .form-grid { grid-template-columns: 1fr; }
-     .product-row { grid-template-columns: 1fr; }
-     .footer-grid { grid-template-columns: 1fr; }
-     .hero::after { display: none; }
+      .nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; border: 2px solid rgba(255,255,255,0.08); border-radius: 8px; cursor: pointer; color: #fff; }
+      .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after { display: block; width: 20px; height: 2px; background: #fff; position: relative; }
+      .nav-toggle span::before, .nav-toggle span::after { content: ''; position: absolute; left: 0; }
+      .nav-toggle span::before { top: -6px; }
+      .nav-toggle span::after { top: 6px; }
+      nav ul.open { display: flex; flex-direction: column; gap: 1rem; position: absolute; top: 100%; right: 5%; background: var(--primary); padding: 1rem 1.2rem; border-radius: 8px; width: calc(100% - 10%); max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+      nav ul.open a { color: #fff; }
+      nav { padding: 1rem 5%; }
+      .logo-text { font-size: 1.2rem; }
+      .hero { padding: 4rem 0 3rem; }
+      .hero h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+      .hero p { font-size: 1rem; max-width: 100%; }
+      .hero-badges { gap: 1rem; }
+      .industries { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .product-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .btn { padding: 0.9rem 1.2rem; }
+      .order-form { padding: 1.2rem; }
+      .product-img { height: 160px; }
+      .container { padding: 0 6%; }
+      .hero::after { display: none; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -133,7 +150,8 @@
         <!-- REPLACE WITH YOUR LOGO: <img src="your-logo.png" alt="King Meech"> -->
         <div class="logo-text">KING <span>MEECH</span></div>
       </div>
-      <ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      <ul id="nav-menu">
         <li><a href="#wholesale">Wholesale</a></li>
         <li><a href="#order">Order</a></li>
         <li><a href="#services">Cooking Services</a></li>
@@ -509,4 +527,23 @@
 
         </div>
         </div>
-    </div></footer></body></html>
+    </div></footer>
+  <script>
+    (function(){
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      if(!navToggle || !navMenu) return;
+      navToggle.addEventListener('click', function(e){
+        e.stopPropagation();
+        const open = navMenu.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', (e) => {
+        if(!navMenu.classList.contains('open')) return;
+        if(e.target.closest('nav')) return;
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    })();
+  </script>
+</body></html>
