@@ -301,9 +301,12 @@
         <p>Minimum $200. We’ll confirm pricing and availability within 2 hours. Payment due on delivery/pickup.</p>
       </div>
       
-      <form name="wholesale-order" method="POST" action="/api/send-form" data-mail="true" class="order-form">
+      <form name="wholesale-order" method="POST" action="/__forms.html" data-netlify="true" netlify-honeypot="bot-field" data-mail="true" class="order-form">
         <input type="hidden" name="form-name" value="wholesale-order">
         <input type="hidden" name="subject" value="New Wholesale Order - King Meech">
+        <p style="display: none;">
+          <label>Don't fill this out: <input name="bot-field"></label>
+        </p>
         
         <div class="form-grid">
           <div class="form-group">
@@ -406,9 +409,12 @@
         <div class="form-card">
           <h3>Careers</h3>
           <p>Join our wholesale, kitchen, or delivery team. Full and part-time. Benefits for full-time.</p>
-          <form name="employment" method="POST" action="/api/send-form" data-mail="true">
+          <form name="employment" method="POST" action="/__forms.html" data-netlify="true" netlify-honeypot="bot-field" data-mail="true">
             <input type="hidden" name="form-name" value="employment">
             <input type="hidden" name="subject" value="New Employment Inquiry - King Meech">
+            <p style="display: none;">
+              <label>Don't fill this out: <input name="bot-field"></label>
+            </p>
             <input type="text" name="name" placeholder="Full Name" required style="margin-bottom: 1rem;">
             <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
             <input type="tel" name="phone" placeholder="Phone" required style="margin-bottom: 1rem;">
@@ -429,9 +435,12 @@
         <div class="form-card">
           <h3>Investors</h3>
           <p>We’re raising capital to expand wholesale operations and launch restaurants. Accredited investors only.</p>
-          <form name="investors" method="POST" action="/api/send-form" data-mail="true">
+          <form name="investors" method="POST" action="/__forms.html" data-netlify="true" netlify-honeypot="bot-field" data-mail="true">
             <input type="hidden" name="form-name" value="investors">
             <input type="hidden" name="subject" value="New Investor Inquiry - King Meech">
+            <p style="display: none;">
+              <label>Don't fill this out: <input name="bot-field"></label>
+            </p>
             <input type="text" name="name" placeholder="Full Name" required style="margin-bottom: 1rem;">
             <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
             <input type="text" name="company" placeholder="Company/Fund" style="margin-bottom: 1rem;">
@@ -449,9 +458,12 @@
         <div class="form-card">
           <h3>Community Giving</h3>
           <p>We donate meals and funds to Cleveland/Columbus food banks. Partner with us or donate.</p>
-          <form name="donations" method="POST" action="/api/send-form" data-mail="true">
+          <form name="donations" method="POST" action="/__forms.html" data-netlify="true" netlify-honeypot="bot-field" data-mail="true">
             <input type="hidden" name="form-name" value="donations">
             <input type="hidden" name="subject" value="New Community Giving Inquiry - King Meech">
+            <p style="display: none;">
+              <label>Don't fill this out: <input name="bot-field"></label>
+            </p>
             <input type="text" name="name" placeholder="Name or Organization" required style="margin-bottom: 1rem;">
             <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
             <select name="type" required style="margin-bottom: 1rem;">
@@ -558,9 +570,10 @@
             status.style.color = 'var(--charcoal)';
 
             try {
-              const response = await fetch(form.action || '/api/send-form', {
+              const response = await fetch(form.action || '/__forms.html', {
                 method: 'POST',
-                body: new FormData(form)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
               });
 
               const text = await response.text();
@@ -568,7 +581,7 @@
                 throw new Error(text || response.statusText);
               }
 
-              status.textContent = text || 'Your message has been sent successfully.';
+              status.textContent = 'Your message has been sent successfully.';
               status.style.color = 'green';
               form.reset();
             } catch (error) {
