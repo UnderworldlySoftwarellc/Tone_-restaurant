@@ -85,6 +85,7 @@
    .order-section h2 { color: #fff; }
    .order-section p { color: rgba(255,255,255,0.8); }
    .order-form { background: #fff; color: var(--charcoal); padding: 3rem; margin-top: 3rem; }
+   .form-status { font-size: 0.95rem; margin-top: 0.75rem; line-height: 1.5; }
    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
    .form-group { margin-bottom: 1.5rem; }
    .form-group.full { grid-column: 1 / -1; }
@@ -300,8 +301,7 @@
         <p>Minimum $200. We’ll confirm pricing and availability within 2 hours. Payment due on delivery/pickup.</p>
       </div>
       
-      <!-- NETLIFY FORMS: Just upload to Netlify and this works. No coding. -->
-      <form name="wholesale-order" method="POST" data-netlify="true" class="order-form">
+      <form name="wholesale-order" method="POST" action="/api/send-form" data-mail="true" class="order-form">
         <input type="hidden" name="form-name" value="wholesale-order">
         <input type="hidden" name="subject" value="New Wholesale Order - King Meech">
         
@@ -406,8 +406,9 @@
         <div class="form-card">
           <h3>Careers</h3>
           <p>Join our wholesale, kitchen, or delivery team. Full and part-time. Benefits for full-time.</p>
-          <form name="employment" method="POST" data-netlify="true">
+          <form name="employment" method="POST" action="/api/send-form" data-mail="true">
             <input type="hidden" name="form-name" value="employment">
+            <input type="hidden" name="subject" value="New Employment Inquiry - King Meech">
             <input type="text" name="name" placeholder="Full Name" required style="margin-bottom: 1rem;">
             <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
             <input type="tel" name="phone" placeholder="Phone" required style="margin-bottom: 1rem;">
@@ -428,8 +429,9 @@
         <div class="form-card">
           <h3>Investors</h3>
           <p>We’re raising capital to expand wholesale operations and launch restaurants. Accredited investors only.</p>
-          <form name="investors" method="POST" data-netlify="true">
+          <form name="investors" method="POST" action="/api/send-form" data-mail="true">
             <input type="hidden" name="form-name" value="investors">
+            <input type="hidden" name="subject" value="New Investor Inquiry - King Meech">
             <input type="text" name="name" placeholder="Full Name" required style="margin-bottom: 1rem;">
             <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
             <input type="text" name="company" placeholder="Company/Fund" style="margin-bottom: 1rem;">
@@ -447,8 +449,9 @@
         <div class="form-card">
           <h3>Community Giving</h3>
           <p>We donate meals and funds to Cleveland/Columbus food banks. Partner with us or donate.</p>
-          <form name="donations" method="POST" data-netlify="true">
+          <form name="donations" method="POST" action="/api/send-form" data-mail="true">
             <input type="hidden" name="form-name" value="donations">
+            <input type="hidden" name="subject" value="New Community Giving Inquiry - King Meech">
             <input type="text" name="name" placeholder="Name or Organization" required style="margin-bottom: 1rem;">
             <input type="email" name="email" placeholder="Email" required style="margin-bottom: 1rem;">
             <select name="type" required style="margin-bottom: 1rem;">
@@ -544,6 +547,49 @@
         navMenu.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
       });
+
+      function initMailForms() {
+        const forms = document.querySelectorAll('form[data-mail="true"]');
+        forms.forEach((form) => {
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const status = getFormStatus(form);
+            status.textContent = 'Sending...';
+            status.style.color = 'var(--charcoal)';
+
+            try {
+              const response = await fetch(form.action || '/api/send-form', {
+                method: 'POST',
+                body: new FormData(form)
+              });
+
+              const text = await response.text();
+              if (!response.ok) {
+                throw new Error(text || response.statusText);
+              }
+
+              status.textContent = text || 'Your message has been sent successfully.';
+              status.style.color = 'green';
+              form.reset();
+            } catch (error) {
+              status.textContent = 'Unable to send the form. ' + (error?.message || 'Please try again.');
+              status.style.color = 'crimson';
+            }
+          });
+        });
+      }
+
+      function getFormStatus(form) {
+        let status = form.querySelector('.form-status');
+        if (!status) {
+          status = document.createElement('p');
+          status.className = 'form-status';
+          form.appendChild(status);
+        }
+        return status;
+      }
+
+      initMailForms();
     })();
   </script>
 </body></html>
